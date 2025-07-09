@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex justify-between items-center py-5 mx-8 sm:mx-20 xl:mx-32 cursor-pointer">
+    <div className="flex justify-between items-center pt-5 mx-8 sm:mx-20 xl:mx-32 cursor-pointer">
       <img
         onClick={() => navigate("/")}
-        src={assets.logo}
+        src={assets.Insite}
         alt="logo"
         className="w-32 sm:w-44"
       />

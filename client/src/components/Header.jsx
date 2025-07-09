@@ -7,7 +7,7 @@ const Header = () => {
       <div className="text-center mt-20 mb-8">
         <div className="inline-flex ittems-center justihy-center gap-4 px-6 py-1.5 mb-4 border border-primary/40 bg-primary/10 rounded-full text-sm text-primary">
           <p>New AI feature integrated</p>
-          <img src={assets.star_icon} alt="" className="w-2.5" />
+          <img src={assets.star_icon} alt="" className="w-4" />
         </div>
         <h1 className="text-3xl sm:text-6xl font-semibold sm:leading-16 text-gray-700">
           Your own <span className="text-primary">blogging</span> <br />{" "}

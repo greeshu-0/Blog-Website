@@ -105,9 +105,18 @@ const Blog = () => {
             Share this article on social media
           </p>
           <div className="flex">
-            <img src={assets.facebook_icon} width={50} />
-            <img src={assets.twitter_icon} width={50} />
-            <img src={assets.googleplus_icon} width={50} />
+            <img
+              src={assets.facebook_icon}
+              className="w-10 h-10 rounded-full border-0.5 border-primary shadow-primary shadow-md mx-2 p-1"
+            />
+            <img
+              src={assets.twitter_icon}
+              className="w-10 h-10 rounded-full border-0.5 border-primary shadow-primary shadow-md mx-2 p-1.5"
+            />
+            <img
+              src={assets.googleplus_icon}
+              className="w-10 h-10 rounded-full border-0.5 border-primary shadow-primary shadow-md mx-2 p-1.5"
+            />
           </div>
         </div>
       </div>

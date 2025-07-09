@@ -51,7 +51,7 @@ const Dashboard = () => {
 
       <div>
         <div className="flex items-center gap-3 m-4 mt-6 text-gray-600">
-          <img src={assets.dashboard_icon_4} />
+          <img src={assets.dashboard_icon_4} className="h-10" />
           <p>Latest Blogs</p>
         </div>
         <div className="relative max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-white">

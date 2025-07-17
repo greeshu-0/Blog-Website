@@ -1,12 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { comments_data } from "../../assets/assets";
 import CommentTableItem from "../../components/admin/CommentTableItem";
+import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
   const [filter, setFilter] = useState("Not Approved");
+  const { axios } = useAppContext();
+  const approveComment = async () => {
+    try {
+      const { data } = await axios.post("/api/admin/approve-comment", {
+        id: _id,
+      });
+      if (data.success) {
+        toast.success(data.message);
+        fetchComments();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+  const deleteComment = async () => {
+    try {
+      const confirm = window.confirm("Are you sure you want to delete this comment??")
+      const { data } = await axios.post("/api/admin/approve-comment", {
+        id: _id,
+      });
+      if (data.success) {
+        toast.success(data.message);
+        fetchComments();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   const fetchComments = async () => {
-    setComments(comments_data);
+    try {
+      const { data } = await axios.get("/api/admin/comments");
+      data.success ? setComments(data.comments) : toast.error(data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   useEffect(() => {
     fetchComments();
@@ -19,7 +58,7 @@ const Comments = () => {
           <button
             onClick={() => setFilter("Approved")}
             className={`shadow-custom-sm border rounded-full px-4 py-1 cursor-pointer text-xs ${
-              filter === "Approved" ? "text-primary" : "text-gray-700"
+              filter === "Approved" ? "text-white bg-primary" : "text-gray-700"
             }`}
           >
             Approved
@@ -27,7 +66,7 @@ const Comments = () => {
           <button
             onClick={() => setFilter("Not Approved")}
             className={`shadow-custom-sm border rounded-full px-4 py-1 cursor-pointer text-xs ${
-              filter === "Not Approved" ? "text-primary" : "text-gray-700"
+              filter === "Not Approved" ? "text-white bg-primary" : "text-gray-700"
             }`}
           >
             Not Approved
@@ -56,7 +95,12 @@ const Comments = () => {
                 return comment.isApproved === false;
               })
               .map((comment, index) => (
-                <CommentTableItem key={comment._id} comment={comment} index={index+1} fetchComments={fetchComments}/>
+                <CommentTableItem
+                  key={comment._id}
+                  comment={comment}
+                  index={index + 1}
+                  fetchComments={fetchComments}
+                />
               ))}
           </tbody>
         </table>

@@ -1,9 +1,9 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Header from '../components/Header'
-import Bloglist from '../components/Bloglist'
-import Newsletter from '../components/Newsletter'
-import Footer from '../components/Footer'
+import React from "react";
+import Navbar from "../components/Navbar";
+import Header from "../components/Header";
+import Bloglist from "../components/BlogList";
+import Newsletter from "../components/Newsletter";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
       <Newsletter />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

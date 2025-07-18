@@ -32,8 +32,10 @@ import dashboard_icon_2 from "./dashboard_icon_2.png";
 import dashboard_icon_3 from "./dashboard_icon_3.png";
 import dashboard_icon_4 from "./dashboard_icon_4.png";
 import Insite from "./Insite.png";
+import ai from "./ai.webp";
 
 export const assets = {
+  ai,
   Insite,
   facebook_icon,
   googleplus_icon,

@@ -5,64 +5,83 @@ import { useAppContext } from "../context/AppContext";
 const Header = () => {
   const { setInput, input } = useAppContext();
   const inputRef = useRef();
-  const onSubmitHandler = async (e) => {
+
+  const onSubmitHandler = (e) => {
     e.preventDefault();
     setInput(inputRef.current.value);
   };
+
   const onClear = () => {
     setInput("");
     inputRef.current.value = "";
   };
+
   return (
-    <div className="mx-8 sm:mx-16 xl:mx-24 relative">
-      <div className="text-center mt-20 mb-8">
-        <div className="inline-flex ittems-center justihy-center gap-4 px-6 py-1.5 mb-4 border border-primary/40 bg-primary/10 rounded-full text-sm text-primary">
-          <p>New AI feature integrated</p>
-          <img src={assets.star_icon} alt="" className="w-4" />
-        </div>
-        <h1 className="text-3xl sm:text-6xl font-semibold sm:leading-16 text-gray-700">
-          Your own <span className="text-primary">blogging</span> <br />{" "}
-          platform.
-        </h1>
-        <p className="my-6 sm:my-8 max-w-2xl m-auto max-sm:text-xs text-gray-500">
-          This is your space to think out loud. to share what matters, and write
-          without filters. Whether it's one word or a thousand, your story
-          starts right here.
-        </p>
-        <form
-          onSubmit={onSubmitHandler}
-          className="flex justify-center max-w-lg max-sm:scale-75 mx-auto border border-gray-300 bg-white rounded overflow-hidden"
-        >
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder="Search for blogs"
-            required
-            className="w-full pl-4 outline-none"
-          ></input>
-          <button
-            type="submit"
-            className="bg-primary text-white px-8 py-2 m-1.5 rounded hover:scale-105 transition-all cursor-pointer"
-          >
-            Search
-          </button>
-        </form>
-      </div>
-      <div className="text-center">
-        {input && (
-          <button
-            onClick={onClear}
-            className="border font-light text-xs py-1 px-3 rounded-sm shadow-custom-sm cursor-pointer"
-          >
-            Clear Search
-          </button>
-        )}
-      </div>
+    <div className="relative bg-gradient-to-br from-blue-50 via-white to-purple-100 py-20 px-6 sm:px-16 xl:px-24 overflow-hidden">
+      {/* Gradient background image */}
       <img
         src={assets.gradientBackground}
         alt=""
-        className="absolute -top-50 -z-1 opacity-50"
+        className="absolute top-0 left-0 w-full h-full object-cover opacity-20 -z-10"
       />
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="text-center lg:text-left">
+          <div className="inline-flex items-center justify-center gap-3 px-5 py-2 mb-6 border border-primary/40 bg-primary/10 rounded-full text-sm text-primary">
+            <p>New AI feature integrated</p>
+            <img src={assets.star_icon} alt="star" className="w-4" />
+          </div>
+
+          <h1 className="text-4xl sm:text-6xl font-bold leading-tight text-gray-800 -tracking">
+            Your Personal Hub for <span className="text-primary">Insight</span>ful Writing
+          </h1>
+
+          <p className="mt-6 sm:mt-8 max-w-xl text-gray-600 text-sm sm:text-base mx-auto lg:mx-0">
+            This is your space to think out loud, share what matters, and write without filters. Whether it's one word or a thousand, your story starts right here.
+          </p>
+
+          {/* Search Form */}
+          <form
+            onSubmit={onSubmitHandler}
+            className="mt-8 flex max-w-lg mx-auto lg:mx-0 border border-gray-300 bg-white rounded-lg overflow-hidden shadow-sm"
+          >
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Search for blogs"
+              required
+              className="w-full px-4 py-2 outline-none text-sm"
+            />
+            <button
+              type="submit"
+              className="bg-primary text-white px-6 py-2 hover:scale-105 transition-all"
+            >
+              Search
+            </button>
+          </form>
+
+          {/* Clear Button */}
+          {input && (
+            <div className="mt-4">
+              <button
+                onClick={onClear}
+                className="text-xs px-3 py-1 border border-gray-300 rounded shadow-sm hover:bg-gray-100 transition"
+              >
+                Clear Search
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Right: Optional Visual */}
+        <div className="hidden lg:flex justify-center items-center">
+          <img
+            src={assets.ai}
+            alt="Blog Icon"
+            className="h-100 opacity-90 rounded-4xl"
+          />
+        </div>
+      </div>
     </div>
   );
 };

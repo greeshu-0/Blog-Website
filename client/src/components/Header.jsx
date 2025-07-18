@@ -18,7 +18,6 @@ const Header = () => {
 
   return (
     <div className="relative bg-gradient-to-br from-blue-50 via-white to-purple-100 py-20 px-6 sm:px-16 xl:px-24 overflow-hidden">
-      {/* Gradient background image */}
       <img
         src={assets.gradientBackground}
         alt=""
@@ -33,14 +32,16 @@ const Header = () => {
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-bold leading-tight text-gray-800 -tracking">
-            Your Personal Hub for <span className="text-primary">Insight</span>ful Writing
+            Your Personal Hub for <span className="text-primary">Insight</span>
+            ful Writing
           </h1>
 
           <p className="mt-6 sm:mt-8 max-w-xl text-gray-600 text-sm sm:text-base mx-auto lg:mx-0">
-            This is your space to think out loud, share what matters, and write without filters. Whether it's one word or a thousand, your story starts right here.
+            This is your space to think out loud, share what matters, and write
+            without filters. Whether it's one word or a thousand, your story
+            starts right here.
           </p>
 
-          {/* Search Form */}
           <form
             onSubmit={onSubmitHandler}
             className="mt-8 flex max-w-lg mx-auto lg:mx-0 border border-gray-300 bg-white rounded-lg overflow-hidden shadow-sm"
@@ -60,7 +61,6 @@ const Header = () => {
             </button>
           </form>
 
-          {/* Clear Button */}
           {input && (
             <div className="mt-4">
               <button
@@ -73,7 +73,6 @@ const Header = () => {
           )}
         </div>
 
-        {/* Right: Optional Visual */}
         <div className="hidden lg:flex justify-center items-center">
           <img
             src={assets.ai}

@@ -8,9 +8,9 @@ const Footer = () => {
         <div>
           <img src={assets.Insite} alt="Logo" className="w-32 smw-44" />
           <p className="max-w-[410px] mt-6">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s,
+            Thanks for reading! Stay curious, stay inspired. New blogs weekly —
+            follow along for fresh insights, stories, and ideas straight from
+            creators who care.
           </p>
         </div>
         <div className="flex flex-wrap justify-between w-full md:w-[45%] gap-5">
@@ -22,7 +22,9 @@ const Footer = () => {
               <ul>
                 {section.links.map((link, i) => (
                   <li key={i} className="text-small space-y-1">
-                    <a href="#" className="hover:underline transition">{link}</a>
+                    <a href="#" className="hover:underline transition">
+                      {link}
+                    </a>
                   </li>
                 ))}
               </ul>

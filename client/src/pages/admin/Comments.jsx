@@ -8,39 +8,10 @@ const Comments = () => {
   const [comments, setComments] = useState([]);
   const [filter, setFilter] = useState("Not Approved");
   const { axios } = useAppContext();
-  const approveComment = async () => {
-    try {
-      const { data } = await axios.post("/api/admin/approve-comment", {
-        id: _id,
-      });
-      if (data.success) {
-        toast.success(data.message);
-        fetchComments();
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-  const deleteComment = async () => {
-    try {
-      const confirm = window.confirm("Are you sure you want to delete this comment??")
-      const { data } = await axios.post("/api/admin/approve-comment", {
-        id: _id,
-      });
-      if (data.success) {
-        toast.success(data.message);
-        fetchComments();
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  // Approve and delete handlers are managed in CommentTableItem; not needed here
   const fetchComments = async () => {
     try {
+      // Fetch all comments from the admin endpoint
       const { data } = await axios.get("/api/admin/comments");
       data.success ? setComments(data.comments) : toast.error(data.message);
     } catch (error) {
@@ -50,6 +21,14 @@ const Comments = () => {
   useEffect(() => {
     fetchComments();
   }, []);
+  // Group comments by blog._id
+  const grouped = comments.reduce((acc, comment) => {
+    const blogId = comment.blog?._id || comment.blog;
+    if (!acc[blogId]) acc[blogId] = { blog: comment.blog, comments: [] };
+    acc[blogId].comments.push(comment);
+    return acc;
+  }, {});
+
   return (
     <div className="flex-1 pt-5 px-5 sm:pt-12 sm:pl-16 bg-blue-50/50">
       <div className="flex justify-between items-center max-w-3xl">
@@ -73,37 +52,42 @@ const Comments = () => {
           </button>
         </div>
       </div>
-      <div className="relative max-w-3xl overflow-x-auto mt-4 bg-white shadow rounded-lg scrollbar-hide">
-        <table className="w-full text-sm text-gray-500">
-          <thead className="text-xs text-gray-700 text-left uppercase">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                Blog Title & Comment
-              </th>
-              <th scope="col" className="px-6 py-3 max-sm:hidden">
-                Date
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {comments
-              .filter((comment) => {
-                if (filter === "Approved") return comment.isApproved == true;
-                return comment.isApproved === false;
-              })
-              .map((comment, index) => (
-                <CommentTableItem
-                  key={comment._id}
-                  comment={comment}
-                  index={index + 1}
-                  fetchComments={fetchComments}
-                />
-              ))}
-          </tbody>
-        </table>
+      <div className="max-w-3xl mt-4">
+        {Object.values(grouped)
+          .map(({ blog, comments }) => {
+            // Filter comments for this blog based on approval filter
+            const filteredComments = comments.filter((comment) => {
+              if (filter === "Approved") return comment.isApproved === true;
+              return comment.isApproved === false;
+            });
+            if (filteredComments.length === 0) return null;
+            return (
+              <div key={blog?._id || blog} className="mb-8 bg-white shadow rounded-lg p-4">
+                <h2 className="font-bold text-lg mb-2 text-primary">
+                  {blog?.title || "Untitled Blog"}
+                </h2>
+                <table className="w-full text-sm text-gray-500">
+                  <thead className="text-xs text-gray-700 text-left uppercase">
+                    <tr>
+                      <th className="px-6 py-3">Comment</th>
+                      <th className="px-6 py-3 max-sm:hidden">Date</th>
+                      <th className="px-6 py-3">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredComments.map((comment, index) => (
+                      <CommentTableItem
+                        key={comment._id}
+                        comment={comment}
+                        index={index + 1}
+                        fetchComments={fetchComments}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

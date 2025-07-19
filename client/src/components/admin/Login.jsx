@@ -50,7 +50,7 @@ const Login = () => {
                 type="email"
                 required
                 placeholder="Your Email Id"
-                className="border-b-2 bprder-gray-300 p-2 outline-none mb-6"
+                className="border-b-2 border-gray-300 p-2 outline-none mb-6"
               />
             </div>
             <div className="flex flex-col">

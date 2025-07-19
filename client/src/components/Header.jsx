@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { setInput, input } = useAppContext();
@@ -71,6 +72,16 @@ const Header = () => {
               </button>
             </div>
           )}
+
+          <div className="mt-6">
+            New here? -
+            <Link
+              to="/signup"
+              className="inline-block hover:underline transition text-base font-semibold"
+            >
+              Signup
+            </Link>
+          </div>
         </div>
 
         <div className="hidden lg:flex justify-center items-center">
